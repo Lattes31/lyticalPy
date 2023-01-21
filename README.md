@@ -2,3 +2,5 @@
 This is a module for python built to help analytical chemists and other analytical scientis use common statistical tools (such as interval range and the use of significant digits) with common machine learning algorithms.
 
 v 0.0.1
+
+Statistical testing is in the plans to be added to the project
