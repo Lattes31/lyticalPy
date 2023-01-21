@@ -42,7 +42,7 @@ def SmallestNumber(column):		#Returns the smallest figures number
 	sizes.sort()
 	return sizes[0]
 
-def Average(column, figures = False):
+def Average(column, figures = False):		#returns column's average
 	soma = 0
 	for i in range(len(column)):
 		soma += column[i]
@@ -50,9 +50,9 @@ def Average(column, figures = False):
 	if figures:
 		return SignificantFigures(soma/len(column), SmallestNumber(column))
 	else:
-		return soma/len(column)		#Returns the average for the column
+		return soma/len(column)
 
-def Median(column, figures = False):
+def Median(column, figures = False):		#Returns the median of the column
 	even = len(column) % 2 == 0
 	lista = [a for a in column]
 	lista.sort()
@@ -84,7 +84,7 @@ def PopulationStandardDeviation(column, figures = False):		#Returns the populati
 	if figures:
 		return (SignificantFigures(sqrt(a/n), SmallestNumber(column)))
 
-def ConfidenceInterval(column, p = 95, string = False, figures = False):
+def ConfidenceInterval(column, p = 95, string = False, figures = False):		#Returns the Confidence Interval in the p probability
 	n_1 = int(str(p)[0])
 	n_2 = int(str(p)[1])
 	z = z_r.iat[n_1, n_2]
@@ -99,12 +99,14 @@ def ConfidenceInterval(column, p = 95, string = False, figures = False):
 	if not figures:
 		return c
 
-def Variance(column):
+def Variance(column, figures = False):		#Returns varience
 	dev = PopulationStandardDeviation(column)
 	v = dev * dev
+	if figures:
+		v = SignificantFigures(v, SmallestNumber(column))
 	return v
 
-def StandardDeviation(column, figures = False):
+def StandardDeviation(column, figures = False):		#Different from the Population Standard Deviation
 	n = len(column) - 1
 	a = 0
 	avr = Average(column)
@@ -116,9 +118,7 @@ def StandardDeviation(column, figures = False):
 		c = SignificantFigures(c, SmallestNumber(column))
 	return c
 
-def ZScore(column, x,u = 0, std_deviation = 0, figures = False):
-	# Returns
-	j = 3
+def ZScore(column, x,u = 0, std_deviation = 0, figures = False):		#Returns the z score at the x element
 	if std_deviation == 0:
 		std_deviation = PopulationStandardDeviation(column)
 	if u == 0:
@@ -127,20 +127,6 @@ def ZScore(column, x,u = 0, std_deviation = 0, figures = False):
 	a_X = DecimalDigits(x)
 	a_U = DecimalDigits(x)
 	a_Devi = DecimalDigits(std_deviation)
-
-
-	#I know this is a dumb way to do it, but i was the best i could do atm lmao
-	#if a_X < a_U and a_X < a_Devi:
-	#	j = Digits(x)
-#
-#	if a_U < a_X and a_U < a_Devi:
-#		j = Digits(u)
-#
-#	if a_Devi < a_U and a_Devi < a_x:
-#		j = Digits(std_deviation)
-#
-#	if s_figures:
-#		z = SignificantFigures(z, j)
 	if figures:
 		z = SignificantFigures(z, SmallestNumber(column))
 	return z
