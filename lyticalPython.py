@@ -137,7 +137,7 @@ def RelativeStandardError(column, figures = False):
 		drp = SignificantFigures(drp, SmallestNumber(column))
 	return drp
 
-def ViariationCoefficient(column, figures):
+def ViariationCoefficient(column, figures = False):
 	drp = RelativeStandardError(column)
 	if figures:
 		drp = SignificantFigures(drp, SmallestNumber(column))
